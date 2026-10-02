@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fantasy Five</title>
+<style>
+:root{--bg:#090d16;--panel:#111827;--panel2:#151d2d;--line:#263248;--text:#f7f8fb;--muted:#9ca8ba;--gold:#c9a227;--gold2:#e7c85c;--green:#38b27a;--red:#e05b65}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 80% -10%,#28304a 0,#090d16 42%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.app{max-width:1200px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.brand{font-size:25px;font-weight:900;letter-spacing:1px}.brand span{color:var(--gold)}.nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{background:transparent;color:var(--muted);border:1px solid transparent;padding:9px 13px;border-radius:10px;cursor:pointer}.nav button.active,.nav button:hover{background:#1a2335;color:#fff;border-color:var(--line)}
+.hero{display:flex;justify-content:space-between;gap:18px;align-items:end;margin:18px 0 20px}.hero h1{margin:0;font-size:38px}.hero p{color:var(--muted);margin:7px 0 0}.gw{background:linear-gradient(135deg,#c9a227,#8e7116);color:#101318;padding:14px 18px;border-radius:15px;text-align:right;font-weight:800}.gw small{display:block;opacity:.75;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:rgba(17,24,39,.9);border:1px solid var(--line);border-radius:16px;padding:17px}.label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}.big{font-size:27px;font-weight:850;margin-top:7px}.gold{color:var(--gold2)}
+.section{margin-top:22px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}.section h2{font-size:18px;margin:0}.table{background:rgba(17,24,39,.86);border:1px solid var(--line);border-radius:16px;overflow:hidden}.row{display:grid;grid-template-columns:55px 1.5fr repeat(5,1fr);align-items:center;padding:14px 16px;border-bottom:1px solid #202a3c;gap:8px}.row:last-child{border-bottom:0}.head{background:#151e2e;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em}.rank{color:var(--gold2);font-weight:900}.player{font-weight:800;cursor:pointer}.player:hover{color:var(--gold2)}.points{font-weight:900;font-size:17px}.sub{color:var(--muted);font-size:12px;margin-top:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.bars{background:rgba(17,24,39,.86);border:1px solid var(--line);border-radius:16px;padding:17px}.barrow{display:grid;grid-template-columns:75px 1fr 42px;align-items:center;gap:10px;margin:12px 0}.track{height:9px;background:#202a3c;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:20px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.show{display:flex}.modalbox{width:min(620px,100%);background:#111827;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 25px 70px #000}.close{float:right;background:#202a3c;border:0;color:#fff;border-radius:9px;padding:7px 10px;cursor:pointer}.profile-head{display:flex;align-items:center;gap:14px;margin:4px 0 18px}.avatar{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#c9a227,#67520d);color:#111;font-size:20px;font-weight:900}.profile-head h2{margin:0}.profile-head p{margin:4px 0;color:var(--muted)}.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.mini{background:#151e2e;border-radius:12px;padding:12px}.mini b{display:block;font-size:20px}.mini span{font-size:11px;color:var(--muted)}.gws{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:15px}.gwbox{background:#151e2e;border-radius:12px;text-align:center;padding:11px}.gwbox b{display:block;font-size:18px;margin-top:4px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.row{grid-template-columns:40px 1.5fr repeat(3,1fr)}.row>*:nth-child(n+6){display:none}.hero{align-items:start;flex-direction:column}.gw{text-align:left}.statgrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">FANTASY <span>FIVE</span></div>
+    <nav class="nav">
+      <button class="active" data-tab="home">Dashboard</button>
+      <button data-tab="players">Players</button>
+      <button data-tab="gameweek">Gameweeks</button>
+      <button data-tab="stats">Statistics</button>
+    </nav>
+  </header>
+
+  <main id="home">
+    <div class="hero">
+      <div><h1>Fantasy Five</h1><p>Player performance, rankings and gameweek analytics.</p></div>
+      <div class="gw"><small>CURRENT GAMEWEEK</small>GW 2</div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="label">Players</div><div class="big">10</div></div>
+      <div class="card"><div class="label">Total points</div><div class="big">204</div></div>
+      <div class="card"><div class="label">Top player</div><div class="big gold">Seif</div></div>
+      <div class="card"><div class="label">Best GW score</div><div class="big gold">27</div></div>
+    </div>
+    <section class="section"><div class="section-head"><h2>Leaderboard</h2><span class="sub">Click a player for profile</span></div><div class="table" id="leaderboard"></div></section>
+    <section class="section grid2">
+      <div class="bars"><div class="section-head"><h2>GW2 Performance</h2><span class="sub">points</span></div><div id="gwbars"></div></div>
+      <div class="bars"><div class="section-head"><h2>Top Contributions</h2></div><div id="contrib"></div></div>
+    </section>
+  </main>
+
+  <main id="players" style="display:none">
+    <div class="hero"><div><h1>Players</h1><p>Individual player profiles and performance.</p></div></div>
+    <section class="section"><div class="table" id="playersTable"></div></section>
+  </main>
+
+  <main id="gameweek" style="display:none">
+    <div class="hero"><div><h1>Gameweeks</h1><p>Round-by-round performance.</p></div></div>
+    <section class="section"><div class="bars" id="gwDetails"></div></section>
+  </main>
+
+  <main id="stats" style="display:none">
+    <div class="hero"><div><h1>Statistics</h1><p>How each player builds their points.</p></div></div>
+    <section class="section grid2"><div class="bars" id="goals"></div><div class="bars" id="assists"></div></section>
+  </main>
+</div>
+
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">✕</button><div id="profile"></div></div></div>
+
+<script>
+const players = [{"name": "Seif", "total": 37, "goals": 6, "assists": 8, "defense": 0, "bonus": 3, "minus": 0, "gw": [23, 14, 0, 0, 0]}, {"name": "Boody", "total": 37, "goals": 9, "assists": 5, "defense": 0, "bonus": 3, "minus": -3, "gw": [10, 27, 0, 0, 0]}, {"name": "Seka", "total": 34, "goals": 6, "assists": 6, "defense": 0, "bonus": 4, "minus": 0, "gw": [17, 17, 0, 0, 0]}, {"name": "Ibrahim", "total": 31, "goals": 4, "assists": 6, "defense": 5, "bonus": 2, "minus": 0, "gw": [14, 17, 0, 0, 0]}, {"name": "Masry", "total": 20, "goals": 4, "assists": 3, "defense": 0, "bonus": 2, "minus": 0, "gw": [17, 3, 0, 0, 0]}, {"name": "Osama", "total": 18, "goals": 3, "assists": 3, "defense": 3, "bonus": 0, "minus": 0, "gw": [6, 12, 0, 0, 0]}, {"name": "Besso", "total": 10, "goals": 1, "assists": 1, "defense": 5, "bonus": 0, "minus": 0, "gw": [0, 10, 0, 0, 0]}, {"name": "Samir", "total": 9, "goals": 1, "assists": 3, "defense": 0, "bonus": 0, "minus": 0, "gw": [4, 5, 0, 0, 0]}, {"name": "Yehia", "total": 8, "goals": 1, "assists": 1, "defense": 3, "bonus": 0, "minus": 0, "gw": [2, 6, 0, 0, 0]}, {"name": "Magdy", "total": 0, "goals": 0, "assists": 0, "defense": 0, "bonus": 0, "minus": 0, "gw": [0, 0, 0, 0, 0]}];
+const $=s=>document.querySelector(s);
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function rank(){return [...players].sort((a,b)=>b.total-a.total)}
+function playerRow(p,i,full=true){
+ return `<div class="row"><div class="rank">${i}</div><div class="player" onclick="openProfile('${p.name}')">${esc(p.name)}<div class="sub">${p.goals} goals · ${p.assists} assists</div></div><div class="points">${p.total}</div><div>${p.gw[0]}</div><div>${p.gw[1]}</div><div>${p.gw[1]-p.gw[0]>=0?'<span style="color:var(--green)">↑':''}${p.gw[1]-p.gw[0]<0?'<span style="color:var(--red)">↓':''} ${p.gw[1]-p.gw[0]}</span></div><div>${p.defense}</div></div>`;
+}
+function render(){
+ let r=rank();
+ $('#leaderboard').innerHTML=`<div class="row head"><div>#</div><div>Player</div><div>Total</div><div>GW1</div><div>GW2</div><div>Change</div><div>Def</div></div>`+r.map((p,i)=>playerRow(p,i+1)).join('');
+ $('#playersTable').innerHTML=`<div class="row head"><div>#</div><div>Player</div><div>Total</div><div>GW1</div><div>GW2</div><div>Change</div><div>Def</div></div>`+r.map((p,i)=>playerRow(p,i+1)).join('');
+ let max=Math.max(...players.map(p=>p.gw[1]));
+ $('#gwbars').innerHTML=r.slice(0,6).map(p=>`<div class="barrow"><span>${esc(p.name)}</span><div class="track"><div class="fill" style="width:${max?p.gw[1]/max*100:0}%"></div></div><b>${p.gw[1]}</b></div>`).join('');
+ const totals={goals:players.reduce((a,p)=>a+p.goals,0),assists:players.reduce((a,p)=>a+p.assists,0),defense:players.reduce((a,p)=>a+p.defense,0)};
+ $('#contrib').innerHTML=[['Goals',totals.goals],['Assists',totals.assists],['Defense',totals.defense],['Bonus',players.reduce((a,p)=>a+p.bonus,0)]].map(x=>`<div class="barrow"><span>${x[0]}</span><div class="track"><div class="fill" style="width:${Math.min(100,x[1]*5)}%"></div></div><b>${x[1]}</b></div>`).join('');
+ $('#goals').innerHTML='<h2>Goals</h2>'+r.map(p=>`<div class="barrow"><span>${esc(p.name)}</span><div class="track"><div class="fill" style="width:${p.goals/Math.max(...r.map(x=>x.goals))*100}%"></div></div><b>${p.goals}</b></div>`).join('');
+ $('#assists').innerHTML='<h2>Assists</h2>'+r.map(p=>`<div class="barrow"><span>${esc(p.name)}</span><div class="track"><div class="fill" style="width:${p.assists/Math.max(...r.map(x=>x.assists))*100}%"></div></div><b>${p.assists}</b></div>`).join('');
+ $('#gwDetails').innerHTML='<h2>Gameweek 1 → Gameweek 2</h2>'+r.map(p=>`<div class="barrow"><span>${esc(p.name)}</span><div class="track"><div class="fill" style="width:${p.gw[1]/27*100}%"></div></div><b>${p.gw[1]}</b></div>`).join('');
+}
+function openProfile(name){
+ const p=players.find(x=>x.name===name); if(!p)return;
+ $('#profile').innerHTML=`<div class="profile-head"><div class="avatar">${esc(p.name[0])}</div><div><h2>${esc(p.name)}</h2><p>${p.total} total points · ${((p.gw[0]+p.gw[1])/2).toFixed(1)} avg/GW</p></div></div>
+ <div class="statgrid"><div class="mini"><b>${p.goals}</b><span>GOALS</span></div><div class="mini"><b>${p.assists}</b><span>ASSISTS</span></div><div class="mini"><b>${p.defense}</b><span>DEFENSE</span></div><div class="mini"><b>${p.bonus}</b><span>BONUS</span></div></div>
+ <h3 style="margin:20px 0 8px">Gameweek history</h3><div class="gws">${p.gw.map((v,i)=>`<div class="gwbox"><span class="sub">GW${i+1}</span><b>${v}</b></div>`).join('')}</div>`;
+ $('#modal').classList.add('show');
+}
+function closeModal(){$('#modal').classList.remove('show')}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('main').forEach(x=>x.style.display='none');$('#'+b.dataset.tab).style.display='block'});
+render();
+</script>
+</body>
+</html>
